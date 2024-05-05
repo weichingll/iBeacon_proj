@@ -11,7 +11,9 @@ import SwiftUI
 struct iBeacon_projApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            mainView()
+                .environmentObject(data_link())
+                .environmentObject(IsLog())
         }
     }
 }
