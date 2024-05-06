@@ -14,7 +14,7 @@ class data_link : ObservableObject{
     let token = "patUj5oLB517zr16T.24c0a004222f170f7d7642dd83bc9022d28a67dc6d4da0487153e22fe48656e1"
     var beacon_Pcount_ID : String = ""
     
-    //抓取User資料庫資料
+    //新增User資料庫資料
     func uploadData(_ userdata: database_user){
         var request = URLRequest(url: user_url)
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
@@ -58,9 +58,10 @@ class data_link : ObservableObject{
     }
     
     //抓取
-    func loadData_Account(completion: @escaping([String]) -> Void){
-        var Account_data = [String]()
+    func loadData_Account(completion: @escaping([String: [(String, String, Date, String)]]) -> Void){
+        var Account_data : [String: [(String, String, Date, String)]] = [:]
         var request = URLRequest(url: user_url)
+        var user_Array: [(String, String, Date, String)] = []
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
@@ -85,10 +86,14 @@ class data_link : ObservableObject{
                 formatter.dateFormat = "yyyy-MM-dd"
                 decoder.dateDecodingStrategy = .formatted(formatter)
                 let data_source = try decoder.decode(database_user.self, from: data)
-                
                 for record in data_source.records{
                     let account = record.fields.user
-                    Account_data.append(account)
+                    let password = record.fields.password
+                    let name = record.fields.name
+                    let date = record.fields.date
+                    let email = record.fields.email
+                    user_Array.append((password, name, date, email))
+                    Account_data[account] = user_Array
                 }
                 completion(Account_data)
                 

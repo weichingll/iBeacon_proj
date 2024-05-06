@@ -14,6 +14,8 @@ struct iBeacon_projApp: App {
             mainView()
                 .environmentObject(data_link())
                 .environmentObject(IsLog())
+                .environmentObject(RangeBeacon())
+                .environmentObject(UserData())
         }
     }
 }

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AC7386E62BE7D55400F7CE7E /* BeaconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7386E52BE7D55400F7CE7E /* BeaconView.swift */; };
+		AC7386E82BE7E00100F7CE7E /* push.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7386E72BE7E00100F7CE7E /* push.swift */; };
 		ACF545E72BE7C5BF00D6B7DF /* iBeacon_projApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF545E62BE7C5BF00D6B7DF /* iBeacon_projApp.swift */; };
 		ACF545EB2BE7C5C000D6B7DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ACF545EA2BE7C5C000D6B7DF /* Assets.xcassets */; };
 		ACF545EE2BE7C5C000D6B7DF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ACF545ED2BE7C5C000D6B7DF /* Preview Assets.xcassets */; };
@@ -24,6 +26,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AC7386E52BE7D55400F7CE7E /* BeaconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconView.swift; sourceTree = "<group>"; };
+		AC7386E72BE7E00100F7CE7E /* push.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = push.swift; sourceTree = "<group>"; };
 		ACF545E32BE7C5BF00D6B7DF /* iBeacon_proj.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iBeacon_proj.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACF545E62BE7C5BF00D6B7DF /* iBeacon_projApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iBeacon_projApp.swift; sourceTree = "<group>"; };
 		ACF545EA2BE7C5C000D6B7DF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -73,11 +77,11 @@
 			children = (
 				ACF545E62BE7C5BF00D6B7DF /* iBeacon_projApp.swift */,
 				ACF545EA2BE7C5C000D6B7DF /* Assets.xcassets */,
-				ACF545EC2BE7C5C000D6B7DF /* Preview Content */,
 				ACF546102BE7C60D00D6B7DF /* Database.swift */,
 				ACF546122BE7C65900D6B7DF /* loginView.swift */,
 				ACF546142BE7C68800D6B7DF /* homePage.swift */,
 				ACF546162BE7C69E00D6B7DF /* peopleFlow.swift */,
+				AC7386E72BE7E00100F7CE7E /* push.swift */,
 				ACF546182BE7C72600D6B7DF /* RangeBeacon.swift */,
 				ACF5461A2BE7C76D00D6B7DF /* registerView.swift */,
 				ACF5461C2BE7C78400D6B7DF /* newbalance.swift */,
@@ -85,6 +89,8 @@
 				ACF546202BE7C7AC00D6B7DF /* chanel.swift */,
 				ACF546222BE7C7C500D6B7DF /* BreakthroughView.swift */,
 				ACF546242BE7C7F400D6B7DF /* pointView.swift */,
+				AC7386E52BE7D55400F7CE7E /* BeaconView.swift */,
+				ACF545EC2BE7C5C000D6B7DF /* Preview Content */,
 			);
 			path = iBeacon_proj;
 			sourceTree = "<group>";
@@ -168,11 +174,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				ACF546152BE7C68800D6B7DF /* homePage.swift in Sources */,
+				AC7386E62BE7D55400F7CE7E /* BeaconView.swift in Sources */,
 				ACF546212BE7C7AC00D6B7DF /* chanel.swift in Sources */,
 				ACF5461D2BE7C78400D6B7DF /* newbalance.swift in Sources */,
 				ACF546112BE7C60D00D6B7DF /* Database.swift in Sources */,
 				ACF5461F2BE7C79B00D6B7DF /* userInformation.swift in Sources */,
 				ACF546172BE7C69E00D6B7DF /* peopleFlow.swift in Sources */,
+				AC7386E82BE7E00100F7CE7E /* push.swift in Sources */,
 				ACF546132BE7C65900D6B7DF /* loginView.swift in Sources */,
 				ACF5461B2BE7C76D00D6B7DF /* registerView.swift in Sources */,
 				ACF545E72BE7C5BF00D6B7DF /* iBeacon_projApp.swift in Sources */,

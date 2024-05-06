@@ -14,6 +14,13 @@ class IsLog : ObservableObject {
     @Published var BeaconPage = false
     
 }
+class UserData : ObservableObject{
+    @Published var User_Account = ""
+    @Published var User_Password = ""
+    @Published var User_Name = ""
+    @Published var User_Date = Date()
+    @Published var User_Email = ""
+}
 
 struct mainView:View {
     @EnvironmentObject var isLog : IsLog
@@ -38,7 +45,10 @@ struct loginView : View {
     @State private var username: String = ""
     @State private var userPassword: String=""
     @State private var isRangeBeacon=false
+    @State private var isShowLoginFail = false
     @EnvironmentObject var isLog : IsLog
+    @EnvironmentObject var data : data_link
+    @EnvironmentObject var User : UserData
     
     
     var body: some View {
@@ -103,8 +113,33 @@ struct loginView : View {
                         .foregroundStyle(.white)
                     
                     Button ("登入"){
-                        print(isLog.isLogin)
-                        isLog.isLogin = true
+                        DispatchQueue.main.async {
+                            data.loadData_Account{ accountData in
+                                if (accountData.keys.contains(username)){
+                                    let user_data = accountData[username]!
+                                    for(password, name, date, email) in user_data{
+                                        if password == userPassword{
+                                            User.User_Account = username
+                                            User.User_Password = password
+                                            User.User_Name = name
+                                            User.User_Date = date
+                                            User.User_Email = email
+                                            
+                                            isLog.isLogin = true
+                                        }else{
+                                            isShowLoginFail = true
+                                        }
+                                    }
+                                }else{
+                                    isShowLoginFail.toggle()
+                                }
+                            }
+                        }
+                    }
+                    .alert("登入失敗", isPresented : $isShowLoginFail){
+                        Button("ok"){
+                            
+                        }
                     }
                 }
                         
@@ -205,22 +240,19 @@ struct registerView : View {
                 Button("註冊"){
                     data.loadData_Account{ accountData in
                         print(accountData)
-                        if (!accountData.contains(userAccount) && userName != "" && userAccount != "" && userPassword != "" && useremail != ""){
-                            print("YES")
+                        if (!accountData.keys.contains(userAccount) && userName != "" && userAccount != "" && userPassword != "" && useremail != ""){
                             let userdata = database_user(records: [.init(fields: .init(user: userAccount, password: userPassword, name: userName, date: userdate, email: useremail))])
                             data.uploadData(userdata)
                             isShowRegisterSucess.toggle()
                             
                         }else{
-                            print("NO")
+
                             isShowRegisterFail.toggle()
                         }
                     }
                 }
                 
             }
-            
-            
             .alert("註冊成功", isPresented : $isShowRegisterSucess){
                 Button("ok"){
                     isLog.Register.toggle()
@@ -248,4 +280,5 @@ struct registerView : View {
     mainView()
         .environmentObject(IsLog())
         .environmentObject(data_link())
+        .environmentObject(UserData())
 }

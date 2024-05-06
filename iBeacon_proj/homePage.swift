@@ -9,14 +9,16 @@ import SwiftUI
 
 struct homePage: View {
     @EnvironmentObject var isLog : IsLog
+    @EnvironmentObject var data : data_link
+    @EnvironmentObject var User : UserData
     @State private var isLogout = false
-    @State private var userName = "芬薇"
+    
     var body: some View {
         NavigationStack {
             VStack{
                 HStack(content: {
                     Spacer()
-                    Text("嗨，\(userName)       ")
+                    Text("嗨，\(User.User_Name)       ")
                 })
                 Spacer()
                     .frame(height:80)
@@ -24,8 +26,8 @@ struct homePage: View {
                 
                 Spacer()
                 HStack{
-                    NavigationLink("beacon"){
-                        RangeBeaconView()
+                    NavigationLink("推播"){
+                        push().environmentObject(RangeBeacon())
                     }
                     
                     Text("|")
@@ -40,7 +42,7 @@ struct homePage: View {
                     
                     Text("|")
                     NavigationLink("人流"){
-                        peopleFlow()
+                        peopleFlow().environmentObject(RangeBeacon()).environmentObject(data_link())
                     }
                     
                     Text("|")
@@ -73,4 +75,5 @@ struct homePage: View {
     homePage()
         .environmentObject(IsLog())
         .environmentObject(data_link())
+        .environmentObject(UserData())
 }

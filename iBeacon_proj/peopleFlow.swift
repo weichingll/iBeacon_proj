@@ -9,6 +9,7 @@ import SwiftUI
 
 struct peopleFlow: View {
     @EnvironmentObject var data : data_link
+    @EnvironmentObject var beacon : RangeBeacon
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     @State private var people = 0
     var body: some View {
@@ -37,10 +38,15 @@ struct peopleFlow: View {
                     
                 }
                 
-            }.onReceive(timer){ _ in
+            }
+            .onReceive(timer){ _ in
+                beacon.update_Pcount()
                 data.loadData_Beacon_people{ item in
                     people = Int(item[1])!
                 }
+            }
+            .onAppear{
+                beacon.search_beacon()
             }
             .background(
                 Image("peopleFlowBackgroung")
@@ -59,4 +65,5 @@ struct peopleFlow: View {
 #Preview {
     peopleFlow()
         .environmentObject(data_link())
+        .environmentObject(RangeBeacon())
 }
