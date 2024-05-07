@@ -11,7 +11,9 @@ struct homePage: View {
     @EnvironmentObject var isLog : IsLog
     @EnvironmentObject var data : data_link
     @EnvironmentObject var User : UserData
+    @EnvironmentObject var beacon : RangeBeacon
     @State private var isLogout = false
+    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
         NavigationStack {
@@ -26,30 +28,43 @@ struct homePage: View {
                 
                 Spacer()
                 HStack{
-                    NavigationLink("推播"){
-                        push().environmentObject(RangeBeacon())
+                    NavigationLink(destination: push()){
+                        Text("推播")
+                    }
+                    .onDisappear{
+                        beacon.stopScanning()
                     }
                     
                     Text("|")
                     NavigationLink("點數"){
                         pointView()
                     }
-                    
-                    Text("|")
-                    NavigationLink("闖關"){
-                        BreakthroughView()
+                    .onDisappear{
+                        beacon.stopScanning()
                     }
                     
+                    Text("|")
+                    NavigationLink(destination: BreakthroughView()){
+                        Text("闖關")
+                    }
+                    .onDisappear{
+                        beacon.stopScanning()
+                        print("STOP BEACON")
+                    }
                     Text("|")
                     NavigationLink("人流"){
                         peopleFlow().environmentObject(RangeBeacon()).environmentObject(data_link())
                     }
-                    
+                    .onDisappear{
+                        beacon.stopScanning()
+                    }
                     Text("|")
                     NavigationLink("個人資訊"){
                         userInformation()
                     }
-        
+                    .onDisappear{
+                        beacon.stopScanning()
+                    }
                     .alert("確定登出？", isPresented: $isLogout, actions: {
                         Button("確定"){
                             isLog.isLogin.toggle()
@@ -59,6 +74,12 @@ struct homePage: View {
                         }
                     })
                 }
+            }
+            .onAppear{
+                beacon.search_beacon()
+            }
+            .onReceive(timer){ _ in
+                //beacon.update_Pcount()
             }
             .background(
                 Image("homePageBackground")

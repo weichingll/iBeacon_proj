@@ -8,15 +8,17 @@
 import SwiftUI
 import CoreLocation
 import Foundation
+import Combine
 
 class RangeBeacon : NSObject, ObservableObject, CLLocationManagerDelegate{
-    private var locationManager: CLLocationManager?
+    @Published var locationManager: CLLocationManager?
     @Published var beaconData: [UUID: [(UUID, NSNumber, NSNumber, String)]] = [:]
     @Published var detectedBeacons: [CLBeacon] = []
     @Published var enteredUUIDs : [UUID] = []
     @Published var people_count = 0
     @Published var isEnter = false
-    private var beaconRegions: [CLBeaconRegion] = []
+    @Published var beaconRegions: [CLBeaconRegion] = []
+    static let shared = RangeBeacon()
     var data : data_link
     //@ObservedObject var beacons = BeaconManager()
     //@State private var enteredUUIDs: [UUID] = []
@@ -28,7 +30,7 @@ class RangeBeacon : NSObject, ObservableObject, CLLocationManagerDelegate{
         locationManager?.delegate = self
         locationManager?.requestAlwaysAuthorization()
     }
-        
+            
     func search_beacon(){
         data.loadData_Beacon_people{ [self] item in
             if let uuids = UUID(uuidString : item[0]){
@@ -101,18 +103,18 @@ class RangeBeacon : NSObject, ObservableObject, CLLocationManagerDelegate{
                 beaconArray.append((beacon.uuid, beacon.major, beacon.minor, distance))
                 beaconData[beacon.uuid] = beaconArray
             }
-            if let people = beaconData[UUID(uuidString:"12345678-1234-1234-1234-AABBCCDDEE33")!], people.count >= 1{
-                print("distanc = \(people[0].3)")
-                let status = people[0].3
+            if let people = beaconData[UUID(uuidString:"12345678-1234-1234-1234-AABBCCDDEE22")!], people.count >= 1{
+                print("distance = \(people[0].3)")
+                /*let status = people[0].3
                 if status == "Immediately" && isEnter == false{
                     isEnter = true
                     people_count += 1
-                    print(people_count)
+                    //print(people_count)
                 }else if status != "Immediately" && isEnter == true{
                     isEnter = false
                     people_count -= 1
-                    print(people_count)
-                }
+                    //print(people_count)
+                }*/
             }
             //print(beaconData)
         }

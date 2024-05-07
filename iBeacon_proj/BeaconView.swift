@@ -37,10 +37,10 @@ struct RangeBeaconView: View {
             .frame(width: 400, height: 500)
         }
         .onAppear{
-            beacon.search_beacon()
+            //beacon.search_beacon()
         }
         .onReceive(timer){ _ in
-            beacon.update_Pcount()
+            ///beacon.update_Pcount()
         }
     }
 }

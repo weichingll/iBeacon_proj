@@ -114,6 +114,7 @@ struct loginView : View {
                     
                     Button ("登入"){
                         DispatchQueue.main.async {
+                            print(isShowLoginFail)
                             data.loadData_Account{ accountData in
                                 if (accountData.keys.contains(username)){
                                     let user_data = accountData[username]!
@@ -124,21 +125,21 @@ struct loginView : View {
                                             User.User_Name = name
                                             User.User_Date = date
                                             User.User_Email = email
-                                            
+                                            print("First")
                                             isLog.isLogin = true
-                                        }else{
-                                            isShowLoginFail = true
+                                            return
                                         }
                                     }
-                                }else{
-                                    isShowLoginFail.toggle()
                                 }
+                                isShowLoginFail = true
                             }
                         }
                     }
                     .alert("登入失敗", isPresented : $isShowLoginFail){
                         Button("ok"){
-                            
+                            DispatchQueue.main.async{
+                                isShowLoginFail = false
+                            }
                         }
                     }
                 }
@@ -234,28 +235,33 @@ struct registerView : View {
             
             HStack{
                 Button("取消"){
-                    isLog.Register.toggle()
+                    DispatchQueue.main.async{
+                        isLog.Register.toggle()
+                    }
                 }
                 Text("|")
                 Button("註冊"){
-                    data.loadData_Account{ accountData in
-                        print(accountData)
-                        if (!accountData.keys.contains(userAccount) && userName != "" && userAccount != "" && userPassword != "" && useremail != ""){
-                            let userdata = database_user(records: [.init(fields: .init(user: userAccount, password: userPassword, name: userName, date: userdate, email: useremail))])
-                            data.uploadData(userdata)
-                            isShowRegisterSucess.toggle()
-                            
-                        }else{
-
-                            isShowRegisterFail.toggle()
+                    DispatchQueue.main.async{
+                        data.loadData_Account{ accountData in
+                            print(accountData)
+                            if (!accountData.keys.contains(userAccount) && userName != "" && userAccount != "" && userPassword != "" && useremail != ""){
+                                let userdata = database_user(records: [.init(fields: .init(user: userAccount, password: userPassword, name: userName, date: userdate, email: useremail))])
+                                data.uploadData(userdata)
+                                isShowRegisterSucess.toggle()
+                                
+                            }else{
+                                
+                                isShowRegisterFail.toggle()
+                            }
                         }
                     }
                 }
-                
             }
             .alert("註冊成功", isPresented : $isShowRegisterSucess){
                 Button("ok"){
-                    isLog.Register.toggle()
+                    DispatchQueue.main.async{
+                        isLog.Register.toggle()
+                    }
                 }
             }message: {
                 Text("返回登入介面重新登入")

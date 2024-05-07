@@ -14,35 +14,73 @@ struct push: View {
     @State private var isLinkNB = false
     @State private var isLinkCH = false
     var body: some View {
+        ZStack{
+            Image("oo")
+                .resizable(resizingMode: .stretch)
+                .scaledToFill()
+                .edgesIgnoringSafeArea(.all)
+        
         NavigationStack {
-            NavigationLink(isActive:$isLinkNB){
+            NavigationLink(isActive: $isLinkNB){
                 newbalance()
             }label: {
+                
+            }.onDisappear{
+                beacon.stopScanning()
             }
-            
             NavigationLink(isActive:$isLinkCH){
                 chanel()
             }label: {
                 
+            }.onDisappear{
+                beacon.stopScanning()
             }
-            VStack{
+            HStack {
+                
                 Text("推播畫面")
+                    .font(.largeTitle)
+                
+            }
+            .position(x:210,y:60)
+            //Spacer()
+               // .frame(height: 200)
+            HStack{
                 ForEach(Array(beacon.beaconData.keys), id: \.self) { key in
                     let value = beacon.beaconData[key, default: []]
                     ForEach(value.indices, id: \.self) { index in
                         let (uuid, _, _, distance) = value[index]
                         switch uuid{
-                            case UUID(uuidString: "12345678-1234-1234-1234-AABBCCDDEE11"):
-                                if distance == "Immediately" || distance == "Near"{
-                                    Button("NewBalence", action:{
-                                        isNB = true
-                                    })
+                        case UUID(uuidString: "12345678-1234-1234-1234-AABBCCDDEE11"):
+                            if distance == "Immediately" || distance == "Near"{
+                                Button{
+                                    isNB = true
+                                }label:{
+                                    Image("NB")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(height: 100)
                                 }
-                            default:
-                                do{}
+                            }
+                        case UUID(uuidString: "12345678-1234-1234-1234-AABBCCDDEE22"):
+                            if distance == "Immediately" || distance == "Near"{
+                                Button{
+                                    isCH = true
+                                }label:{
+                                    Image("chanel2")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(height: 100)
+                                    
+                                }
+                            }
+                            
+                        default:
+                            do{}
                         }
                     }
                 }
+            }
+            .position(x:200,y:100)
                 .alert("靠近Chanel囉",isPresented: $isCH){
                     Button("取消"){}
                     Button("去看看"){isLinkCH.toggle()}
@@ -50,37 +88,9 @@ struct push: View {
                 .alert("靠近NewBalence囉",isPresented: $isNB){
                     Button("取消"){}
                     Button("去看看"){isLinkNB.toggle()}
-                }
-            }
-            
-            
-            /*Button("變ＮＢ"){
-                isNB.toggle()
-            }
-            Button("變CH"){
-                isCH.toggle()
-            }
-            
-            .alert("靠近Chanel囉",isPresented: $isCH){
-                Button("取消"){
                     
                 }
-                Button("去看看"){
-                    isLinkCH.toggle()
-                }
-                
-                
             }
-            .alert("靠近NewBalence囉",isPresented: $isNB){
-                Button("取消"){
-                    
-                }
-                Button("去看看"){
-                    isLinkNB.toggle()
-                }
-                
-
-            }*/
             
             
         }.onAppear{
