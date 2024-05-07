@@ -125,7 +125,6 @@ struct loginView : View {
                                             User.User_Name = name
                                             User.User_Date = date
                                             User.User_Email = email
-                                            print("First")
                                             isLog.isLogin = true
                                             return
                                         }
