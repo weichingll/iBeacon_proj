@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4145A1AC2C311F2100A3FFA0 /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4145A1AB2C311F2100A3FFA0 /* SwiftUIView.swift */; };
+		41B108882C2EDCF6003C9138 /* userdata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B108872C2EDCF6003C9138 /* userdata.swift */; };
+		41B1088A2C2EDE55003C9138 /* giftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B108892C2EDE55003C9138 /* giftView.swift */; };
+		41B1088C2C2EE52D003C9138 /* giftData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B1088B2C2EE52D003C9138 /* giftData.swift */; };
+		41E6A4622C2F097F002ADAEF /* checkInRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E6A4612C2F097F002ADAEF /* checkInRecord.swift */; };
 		AC7386E62BE7D55400F7CE7E /* BeaconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7386E52BE7D55400F7CE7E /* BeaconView.swift */; };
 		AC7386E82BE7E00100F7CE7E /* push.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7386E72BE7E00100F7CE7E /* push.swift */; };
 		ACF545E72BE7C5BF00D6B7DF /* iBeacon_projApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF545E62BE7C5BF00D6B7DF /* iBeacon_projApp.swift */; };
@@ -26,6 +31,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4145A1AB2C311F2100A3FFA0 /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
+		41B108872C2EDCF6003C9138 /* userdata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userdata.swift; sourceTree = "<group>"; };
+		41B108892C2EDE55003C9138 /* giftView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = giftView.swift; sourceTree = "<group>"; };
+		41B1088B2C2EE52D003C9138 /* giftData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = giftData.swift; sourceTree = "<group>"; };
+		41E6A4612C2F097F002ADAEF /* checkInRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = checkInRecord.swift; sourceTree = "<group>"; };
 		AC7386E52BE7D55400F7CE7E /* BeaconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconView.swift; sourceTree = "<group>"; };
 		AC7386E72BE7E00100F7CE7E /* push.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = push.swift; sourceTree = "<group>"; };
 		ACF545E32BE7C5BF00D6B7DF /* iBeacon_proj.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iBeacon_proj.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -78,6 +88,8 @@
 				ACF545E62BE7C5BF00D6B7DF /* iBeacon_projApp.swift */,
 				ACF545EA2BE7C5C000D6B7DF /* Assets.xcassets */,
 				ACF546102BE7C60D00D6B7DF /* Database.swift */,
+				41B108872C2EDCF6003C9138 /* userdata.swift */,
+				41B1088B2C2EE52D003C9138 /* giftData.swift */,
 				ACF546122BE7C65900D6B7DF /* loginView.swift */,
 				ACF546142BE7C68800D6B7DF /* homePage.swift */,
 				ACF546162BE7C69E00D6B7DF /* peopleFlow.swift */,
@@ -86,9 +98,12 @@
 				ACF5461A2BE7C76D00D6B7DF /* registerView.swift */,
 				ACF5461C2BE7C78400D6B7DF /* newbalance.swift */,
 				ACF5461E2BE7C79B00D6B7DF /* userInformation.swift */,
+				41E6A4612C2F097F002ADAEF /* checkInRecord.swift */,
 				ACF546202BE7C7AC00D6B7DF /* chanel.swift */,
 				ACF546222BE7C7C500D6B7DF /* BreakthroughView.swift */,
 				ACF546242BE7C7F400D6B7DF /* pointView.swift */,
+				41B108892C2EDE55003C9138 /* giftView.swift */,
+				4145A1AB2C311F2100A3FFA0 /* SwiftUIView.swift */,
 				AC7386E52BE7D55400F7CE7E /* BeaconView.swift */,
 				ACF545EC2BE7C5C000D6B7DF /* Preview Content */,
 			);
@@ -174,18 +189,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				ACF546152BE7C68800D6B7DF /* homePage.swift in Sources */,
+				41B108882C2EDCF6003C9138 /* userdata.swift in Sources */,
+				41B1088C2C2EE52D003C9138 /* giftData.swift in Sources */,
 				AC7386E62BE7D55400F7CE7E /* BeaconView.swift in Sources */,
 				ACF546212BE7C7AC00D6B7DF /* chanel.swift in Sources */,
 				ACF5461D2BE7C78400D6B7DF /* newbalance.swift in Sources */,
 				ACF546112BE7C60D00D6B7DF /* Database.swift in Sources */,
 				ACF5461F2BE7C79B00D6B7DF /* userInformation.swift in Sources */,
 				ACF546172BE7C69E00D6B7DF /* peopleFlow.swift in Sources */,
+				4145A1AC2C311F2100A3FFA0 /* SwiftUIView.swift in Sources */,
 				AC7386E82BE7E00100F7CE7E /* push.swift in Sources */,
+				41E6A4622C2F097F002ADAEF /* checkInRecord.swift in Sources */,
 				ACF546132BE7C65900D6B7DF /* loginView.swift in Sources */,
 				ACF5461B2BE7C76D00D6B7DF /* registerView.swift in Sources */,
 				ACF545E72BE7C5BF00D6B7DF /* iBeacon_projApp.swift in Sources */,
 				ACF546252BE7C7F400D6B7DF /* pointView.swift in Sources */,
 				ACF546232BE7C7C500D6B7DF /* BreakthroughView.swift in Sources */,
+				41B1088A2C2EDE55003C9138 /* giftView.swift in Sources */,
 				ACF546192BE7C72600D6B7DF /* RangeBeacon.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

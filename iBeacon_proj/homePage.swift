@@ -36,8 +36,8 @@ struct homePage: View {
                     }
                     
                     Text("|")
-                    NavigationLink("點數"){
-                        pointView()
+                    NavigationLink("點數商城"){
+                        giftView()
                     }
                     .onDisappear{
                         beacon.stopScanning()
