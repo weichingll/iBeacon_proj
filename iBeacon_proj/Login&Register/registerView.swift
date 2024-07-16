@@ -4,7 +4,7 @@
 //
 //  Created by 林京緯 on 2024/5/3.
 //
-/*
+
 import SwiftUI
 
 struct registerView : View {
@@ -91,4 +91,4 @@ struct registerView : View {
     }
 }
 
-*/
+

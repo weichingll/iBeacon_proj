@@ -26,6 +26,7 @@ class Isshow : ObservableObject {
         return success
     }
 }
+
 struct BreakthroughView: View {
     @EnvironmentObject var isshow : Isshow
     @EnvironmentObject var beacon : RangeBeacon
