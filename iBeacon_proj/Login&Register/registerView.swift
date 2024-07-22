@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct registerView : View {
+/*struct registerView : View {
     @EnvironmentObject var isLog : IsLog
     @EnvironmentObject var data : data_link
     @State private var userName : String = ""
@@ -90,5 +90,5 @@ struct registerView : View {
         }
     }
 }
-
+*/
 

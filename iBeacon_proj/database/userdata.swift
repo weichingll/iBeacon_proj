@@ -17,13 +17,13 @@ struct AirtableResponse: Codable {
 }
 
 class AirtableService {
-    let apiKey = "patUj5oLB517zr16T.24c0a004222f170f7d7642dd83bc9022d28a67dc6d4da0487153e22fe48656e1"
-    let baseId = "app5fKBa04lBdINdG"
-    let tableName = "User"
+    let apiKey = airtable().apiKey
+    let baseId = airtable().baseId
+    let tableName = airtable.table.user.rawValue
     let userName = "s001"
 
     func fetchRecords(completion: @escaping ([Record]?) -> Void) {
-        let urlString = "https://api.airtable.com/v0/\(baseId)/\(tableName)?filterByFormula=({user}='\(userName)')"
+        let urlString = "https://api.airtable.com/v0/\(baseId)/\(tableName)?filterByFormula=({user}='\(tableName)')"
         guard let url = URL(string: urlString) else { return }
         
         var request = URLRequest(url: url)

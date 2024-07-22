@@ -12,6 +12,8 @@
 		41B1088A2C2EDE55003C9138 /* giftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B108892C2EDE55003C9138 /* giftView.swift */; };
 		41B1088C2C2EE52D003C9138 /* giftData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B1088B2C2EE52D003C9138 /* giftData.swift */; };
 		41E6A4622C2F097F002ADAEF /* checkInRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E6A4612C2F097F002ADAEF /* checkInRecord.swift */; };
+		AC7057432C4632550015AE61 /* Airtable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7057422C4632540015AE61 /* Airtable.swift */; };
+		AC7057452C46395B0015AE61 /* Homepage_Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7057442C46395B0015AE61 /* Homepage_Data.swift */; };
 		AC7386E62BE7D55400F7CE7E /* BeaconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7386E52BE7D55400F7CE7E /* BeaconView.swift */; };
 		AC7386E82BE7E00100F7CE7E /* push.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7386E72BE7E00100F7CE7E /* push.swift */; };
 		ACF545E72BE7C5BF00D6B7DF /* iBeacon_projApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF545E62BE7C5BF00D6B7DF /* iBeacon_projApp.swift */; };
@@ -36,6 +38,9 @@
 		41B108892C2EDE55003C9138 /* giftView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = giftView.swift; sourceTree = "<group>"; };
 		41B1088B2C2EE52D003C9138 /* giftData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = giftData.swift; sourceTree = "<group>"; };
 		41E6A4612C2F097F002ADAEF /* checkInRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = checkInRecord.swift; sourceTree = "<group>"; };
+		AC0B50362C3695DE00E57117 /* iBeacon-proj-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "iBeacon-proj-Info.plist"; sourceTree = SOURCE_ROOT; };
+		AC7057422C4632540015AE61 /* Airtable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Airtable.swift; sourceTree = "<group>"; };
+		AC7057442C46395B0015AE61 /* Homepage_Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Homepage_Data.swift; sourceTree = "<group>"; };
 		AC7386E52BE7D55400F7CE7E /* BeaconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconView.swift; sourceTree = "<group>"; };
 		AC7386E72BE7E00100F7CE7E /* push.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = push.swift; sourceTree = "<group>"; };
 		ACF545E32BE7C5BF00D6B7DF /* iBeacon_proj.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iBeacon_proj.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -66,6 +71,65 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AC70573A2C462CFC0015AE61 /* database */ = {
+			isa = PBXGroup;
+			children = (
+				ACF546102BE7C60D00D6B7DF /* Database.swift */,
+				41B1088B2C2EE52D003C9138 /* giftData.swift */,
+				41B108872C2EDCF6003C9138 /* userdata.swift */,
+				AC7057422C4632540015AE61 /* Airtable.swift */,
+				AC7057442C46395B0015AE61 /* Homepage_Data.swift */,
+			);
+			path = database;
+			sourceTree = "<group>";
+		};
+		AC70573B2C462F230015AE61 /* Login&Register */ = {
+			isa = PBXGroup;
+			children = (
+				ACF5461A2BE7C76D00D6B7DF /* registerView.swift */,
+				ACF546122BE7C65900D6B7DF /* loginView.swift */,
+			);
+			path = "Login&Register";
+			sourceTree = "<group>";
+		};
+		AC70573C2C462F690015AE61 /* Beacon */ = {
+			isa = PBXGroup;
+			children = (
+				ACF546182BE7C72600D6B7DF /* RangeBeacon.swift */,
+			);
+			path = Beacon;
+			sourceTree = "<group>";
+		};
+		AC70573D2C462F9D0015AE61 /* Shop */ = {
+			isa = PBXGroup;
+			children = (
+				ACF546202BE7C7AC00D6B7DF /* chanel.swift */,
+				ACF5461C2BE7C78400D6B7DF /* newbalance.swift */,
+			);
+			path = Shop;
+			sourceTree = "<group>";
+		};
+		AC70573E2C4630CE0015AE61 /* User_information */ = {
+			isa = PBXGroup;
+			children = (
+				41E6A4612C2F097F002ADAEF /* checkInRecord.swift */,
+				ACF5461E2BE7C79B00D6B7DF /* userInformation.swift */,
+			);
+			path = User_information;
+			sourceTree = "<group>";
+		};
+		AC70573F2C4631900015AE61 /* Product_function */ = {
+			isa = PBXGroup;
+			children = (
+				41B108892C2EDE55003C9138 /* giftView.swift */,
+				ACF546242BE7C7F400D6B7DF /* pointView.swift */,
+				ACF546222BE7C7C500D6B7DF /* BreakthroughView.swift */,
+				AC7386E72BE7E00100F7CE7E /* push.swift */,
+				ACF546162BE7C69E00D6B7DF /* peopleFlow.swift */,
+			);
+			path = Product_function;
+			sourceTree = "<group>";
+		};
 		ACF545DA2BE7C5BF00D6B7DF = {
 			isa = PBXGroup;
 			children = (
@@ -85,24 +149,16 @@
 		ACF545E52BE7C5BF00D6B7DF /* iBeacon_proj */ = {
 			isa = PBXGroup;
 			children = (
+				AC70573F2C4631900015AE61 /* Product_function */,
+				AC70573E2C4630CE0015AE61 /* User_information */,
+				AC70573D2C462F9D0015AE61 /* Shop */,
+				AC70573C2C462F690015AE61 /* Beacon */,
+				AC70573B2C462F230015AE61 /* Login&Register */,
+				AC70573A2C462CFC0015AE61 /* database */,
+				AC0B50362C3695DE00E57117 /* iBeacon-proj-Info.plist */,
 				ACF545E62BE7C5BF00D6B7DF /* iBeacon_projApp.swift */,
 				ACF545EA2BE7C5C000D6B7DF /* Assets.xcassets */,
-				ACF546102BE7C60D00D6B7DF /* Database.swift */,
-				41B108872C2EDCF6003C9138 /* userdata.swift */,
-				41B1088B2C2EE52D003C9138 /* giftData.swift */,
-				ACF546122BE7C65900D6B7DF /* loginView.swift */,
 				ACF546142BE7C68800D6B7DF /* homePage.swift */,
-				ACF546162BE7C69E00D6B7DF /* peopleFlow.swift */,
-				AC7386E72BE7E00100F7CE7E /* push.swift */,
-				ACF546182BE7C72600D6B7DF /* RangeBeacon.swift */,
-				ACF5461A2BE7C76D00D6B7DF /* registerView.swift */,
-				ACF5461C2BE7C78400D6B7DF /* newbalance.swift */,
-				ACF5461E2BE7C79B00D6B7DF /* userInformation.swift */,
-				41E6A4612C2F097F002ADAEF /* checkInRecord.swift */,
-				ACF546202BE7C7AC00D6B7DF /* chanel.swift */,
-				ACF546222BE7C7C500D6B7DF /* BreakthroughView.swift */,
-				ACF546242BE7C7F400D6B7DF /* pointView.swift */,
-				41B108892C2EDE55003C9138 /* giftView.swift */,
 				4145A1AB2C311F2100A3FFA0 /* SwiftUIView.swift */,
 				AC7386E52BE7D55400F7CE7E /* BeaconView.swift */,
 				ACF545EC2BE7C5C000D6B7DF /* Preview Content */,
@@ -189,6 +245,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ACF546152BE7C68800D6B7DF /* homePage.swift in Sources */,
+				AC7057432C4632550015AE61 /* Airtable.swift in Sources */,
 				41B108882C2EDCF6003C9138 /* userdata.swift in Sources */,
 				41B1088C2C2EE52D003C9138 /* giftData.swift in Sources */,
 				AC7386E62BE7D55400F7CE7E /* BeaconView.swift in Sources */,
@@ -203,6 +260,7 @@
 				ACF546132BE7C65900D6B7DF /* loginView.swift in Sources */,
 				ACF5461B2BE7C76D00D6B7DF /* registerView.swift in Sources */,
 				ACF545E72BE7C5BF00D6B7DF /* iBeacon_projApp.swift in Sources */,
+				AC7057452C46395B0015AE61 /* Homepage_Data.swift in Sources */,
 				ACF546252BE7C7F400D6B7DF /* pointView.swift in Sources */,
 				ACF546232BE7C7C500D6B7DF /* BreakthroughView.swift in Sources */,
 				41B1088A2C2EDE55003C9138 /* giftView.swift in Sources */,
@@ -343,6 +401,8 @@
 				DEVELOPMENT_TEAM = 7QAF64L6SC;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "iBeacon-proj-Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -374,6 +434,8 @@
 				DEVELOPMENT_TEAM = 7QAF64L6SC;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "iBeacon-proj-Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

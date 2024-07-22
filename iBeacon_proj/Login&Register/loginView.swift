@@ -29,7 +29,7 @@ struct mainView:View {
             if (isLog.isLogin == true){
                 homePage()
                 if (isLog.BeaconPage == true){
-                    RangeBeaconView()
+                    //RangeBeaconView()
                 }
             }else if(isLog.isLogin == false){
                 if isLog.Register == true{

@@ -7,7 +7,7 @@
 
 import SwiftUI
 import CoreLocation
-
+/*
 struct RangeBeaconView: View {
     @EnvironmentObject var data : data_link
     @EnvironmentObject var beacon : RangeBeacon
@@ -50,3 +50,4 @@ struct RangeBeaconView: View {
 #Preview {
     RangeBeaconView().environmentObject(data_link())
 }
+*/

@@ -9,6 +9,7 @@ import SwiftUI
 
 @main
 struct iBeacon_projApp: App {
+    //@UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     var body: some Scene {
         WindowGroup {
             mainView()
