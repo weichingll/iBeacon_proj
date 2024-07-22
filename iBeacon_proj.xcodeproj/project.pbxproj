@@ -39,6 +39,7 @@
 		41B1088B2C2EE52D003C9138 /* giftData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = giftData.swift; sourceTree = "<group>"; };
 		41E6A4612C2F097F002ADAEF /* checkInRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = checkInRecord.swift; sourceTree = "<group>"; };
 		AC0B50362C3695DE00E57117 /* iBeacon-proj-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "iBeacon-proj-Info.plist"; sourceTree = SOURCE_ROOT; };
+		AC3AC3682C4942D5006977B5 /* iBeacon_projDebug.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; name = iBeacon_projDebug.entitlements; path = ../../../.Trash/iBeacon_projDebug.entitlements; sourceTree = "<group>"; };
 		AC7057422C4632540015AE61 /* Airtable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Airtable.swift; sourceTree = "<group>"; };
 		AC7057442C46395B0015AE61 /* Homepage_Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Homepage_Data.swift; sourceTree = "<group>"; };
 		AC7386E52BE7D55400F7CE7E /* BeaconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconView.swift; sourceTree = "<group>"; };
@@ -149,6 +150,7 @@
 		ACF545E52BE7C5BF00D6B7DF /* iBeacon_proj */ = {
 			isa = PBXGroup;
 			children = (
+				AC3AC3682C4942D5006977B5 /* iBeacon_projDebug.entitlements */,
 				AC70573F2C4631900015AE61 /* Product_function */,
 				AC70573E2C4630CE0015AE61 /* User_information */,
 				AC70573D2C462F9D0015AE61 /* Shop */,
@@ -395,6 +397,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"iBeacon_proj/Preview Content\"";
@@ -417,6 +421,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "None.iBeacon-proj";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -428,10 +433,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"iBeacon_proj/Preview Content\"";
-				DEVELOPMENT_TEAM = 7QAF64L6SC;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "iBeacon-proj-Info.plist";
@@ -450,6 +456,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "None.iBeacon-proj";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

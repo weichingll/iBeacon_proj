@@ -52,7 +52,6 @@ struct loginView : View {
     
     
     var body: some View {
-        
             VStack{
                 Spacer()
                 HStack{
@@ -142,15 +141,13 @@ struct loginView : View {
                         }
                     }
                 }
-                        
-                    
             }
             .background(
-                        Image("loginBackground")
-                            .resizable()
-                            .scaledToFill()
-                            .edgesIgnoringSafeArea(.all)
-                    )
+                Image("loginBackground")
+                    .resizable()
+                    .scaledToFill()
+                    .edgesIgnoringSafeArea(.all)
+            )
         }
     }
 
