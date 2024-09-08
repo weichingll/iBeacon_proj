@@ -1,14 +1,31 @@
 import SwiftUI
 import Combine
 
-struct checkInRecordView: View {
-    @State private var checkInRecords: [CheckinRecord] = []
-    @EnvironmentObject var User : UserData
-    private let baseURL = "https://api.airtable.com/v0/app5fKBa04lBdINdG/checkInRecord?filterByFormula=({user}='s001')"
+struct CheckInAirtableResponse1: Codable{
+    let records: [CheckInRecord]
+}
 
+struct CheckInRecord1: Codable {
+    let id: String
+    let createdTime: String
+    let fields: CheckInFields1
+}
+
+struct CheckInFields1: Codable {
+    let user: String
+    let location: String
+    let point: Int
+    let uuid: String
+}
+
+struct checkInRecordView: View {
+    @EnvironmentObject var User : UserData
+    let checkIndata = CheckInAirtableService()
+    @State var checkIn: [CheckInRecord] = []
+    
     var body: some View {
         NavigationView {
-            List(checkInRecords, id: \.id) { record in
+            List(checkIn, id: \.id) { record in
                 VStack(alignment: .leading) {
                     Text("\(record.fields.location)")
                     Text("點數: \(record.fields.point)")
@@ -19,30 +36,33 @@ struct checkInRecordView: View {
             }
             .navigationBarTitle("Check-In Records")
             .onAppear {
-                fetchData()
+                checkIndata.fetchCheckIn(user: User.User_Account){data in
+                    if let data = data{
+                        checkIn = data
+                    }
+                }
             }
         }
-        
     }
+    
     func formattedDate(_ dateString: String) -> String {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-            dateFormatter.timeZone = TimeZone(identifier: "UTC") // 设置时区为 UTC
-            guard let date = dateFormatter.date(from: dateString) else {
-                return "Invalid Date"
-            }
-
-            // 加8小时
-            let calendar = Calendar.current
-            let modifiedDate = calendar.date(byAdding: .hour, value: 8, to: date) ?? date
-
-            // 重新格式化输出
-            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-            dateFormatter.timeZone = TimeZone.current // 设置时区为当前时区
-            return dateFormatter.string(from: modifiedDate)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+        dateFormatter.timeZone = TimeZone(identifier: "UTC") // 设置时区为 UTC
+        guard let date = dateFormatter.date(from: dateString) else {
+            return "Invalid Date"
         }
+        // 加8小时
+        let calendar = Calendar.current
+        let modifiedDate = calendar.date(byAdding: .hour, value: 8, to: date) ?? date
+        // 重新格式化输出
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateFormatter.timeZone = TimeZone.current // 设置时区为当前时区
+        return dateFormatter.string(from: modifiedDate)
+    }
 
-    private func fetchData() {
+    /*private func fetchData() {
+        let baseURL = "https://api.airtable.com/v0/app5fKBa04lBdINdG/checkInRecord?filterByFormula=({user} = '\(User.User_Account)')"
         guard let url = URL(string: baseURL) else {
             print("Invalid URL")
             return
@@ -68,37 +88,13 @@ struct checkInRecordView: View {
                 print("No data received: \(error?.localizedDescription ?? "Unknown error")")
             }
         }.resume()
-    }
-    
+    }*/
 }
 
-struct CheckinResponse: Codable {
-    var records: [CheckinRecord]
-}
 
-struct CheckinRecord: Codable, Identifiable {
-    var id: String
-    var createdTime: String
-    var fields: CheckinFields
 
-    enum CodingKeys: String, CodingKey {
-        case id
-        case createdTime
-        case fields
-    }
-}
 
-struct CheckinFields: Codable {
-    var point: Int
-    var user: String
-    var location: String
-
-    enum CodingKeys: String, CodingKey {
-        case point
-        case user
-        case location
-    }
-}
 #Preview {
     checkInRecordView()
+        .environmentObject(UserData())
 }

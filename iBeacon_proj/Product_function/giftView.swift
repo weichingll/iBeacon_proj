@@ -55,5 +55,5 @@ struct giftView: View {
 }
 
 #Preview {
-    giftView()
+    giftView().environmentObject(UserData())
 }

@@ -8,31 +8,12 @@
 import Foundation
 
 class data_link : ObservableObject{
+    let apiurl = airtable().apiurl
     let user_url = URL(string: "https://api.airtable.com/v0/app5fKBa04lBdINdG/User")!
     let beacon_url = URL(string: "https://api.airtable.com/v0/app5fKBa04lBdINdG/beacon")!
     let beacon_people_url = URL(string: "https://api.airtable.com/v0/app5fKBa04lBdINdG/people")!
     let token = "patUj5oLB517zr16T.24c0a004222f170f7d7642dd83bc9022d28a67dc6d4da0487153e22fe48656e1"
     var beacon_Pcount_ID : String = ""
-    
-    //新增User資料庫資料
-    func uploadData(_ userdata: database_user){
-        var request = URLRequest(url: user_url)
-        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        let encoder = JSONEncoder()
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        encoder.dateEncodingStrategy = .formatted(formatter)
-        request.httpBody = try? encoder.encode(userdata)
-        
-        URLSession.shared.dataTask(with: request){ data, response, error in
-           /* if let data,
-              let content = String(data: data, encoding:  .utf8){
-                    
-                }*/
-        }.resume()
-    }
     
     //更新人流
     func uploadData_Pcount(_ Pcount_data: database_people_beacon){
@@ -55,52 +36,6 @@ class data_link : ObservableObject{
         }catch{
             print(error)
         }
-    }
-    
-    //抓取
-    func loadData_Account(completion: @escaping([String: [(String, String, Date, String)]]) -> Void){
-        var Account_data : [String: [(String, String, Date, String)]] = [:]
-        var request = URLRequest(url: user_url)
-        var user_Array: [(String, String, Date, String)] = []
-        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            if let error = error {
-                print("Error: \(error)")
-                return
-            }
-            
-            guard let httpResponse = response as? HTTPURLResponse,
-                  (200...299).contains(httpResponse.statusCode) else {
-                print("Invalid response")
-                return
-            }
-            
-            guard let data = data else {
-                print("No data received")
-                return
-            }
-            
-            do {
-                let decoder = JSONDecoder()
-                let formatter = DateFormatter()
-                formatter.dateFormat = "yyyy-MM-dd"
-                decoder.dateDecodingStrategy = .formatted(formatter)
-                let data_source = try decoder.decode(database_user.self, from: data)
-                for record in data_source.records{
-                    let account = record.fields.user
-                    let password = record.fields.password
-                    let name = record.fields.name
-                    let date = record.fields.date
-                    let email = record.fields.email
-                    user_Array.append((password, name, date, email))
-                    Account_data[account] = user_Array
-                }
-                completion(Account_data)
-                
-            } catch {
-                print("Error decoding JSON: \(error)")
-            }
-        }.resume()
     }
     
     func loadData_Beacon(completion: @escaping([String]) -> Void){

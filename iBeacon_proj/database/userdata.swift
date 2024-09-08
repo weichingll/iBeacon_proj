@@ -18,12 +18,12 @@ struct AirtableResponse: Codable {
 
 class AirtableService {
     let apiKey = airtable().apiKey
-    let baseId = airtable().baseId
-    let tableName = airtable.table.user.rawValue
+    let apiurl = airtable().apiurl
+    let tableName = airtable.table.user.rawValue //User表
     let userName = "s001"
 
     func fetchRecords(completion: @escaping ([Record]?) -> Void) {
-        let urlString = "https://api.airtable.com/v0/\(baseId)/\(tableName)?filterByFormula=({user}='\(tableName)')"
+        let urlString = "\(apiurl)/\(tableName)?filterByFormula=({user}='\(tableName)')"
         guard let url = URL(string: urlString) else { return }
         
         var request = URLRequest(url: url)

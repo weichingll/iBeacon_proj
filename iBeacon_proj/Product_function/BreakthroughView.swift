@@ -14,9 +14,9 @@ class Isshow : ObservableObject {
     
     func search_shop(_ uuid:UUID, _ beaconData:[UUID: [(UUID, NSNumber, NSNumber, String)]]) -> Bool{
         var success = false
-        print("Enter")
+        //print("Enter")
         if let shop_beacon = beaconData[uuid]{
-            print(shop_beacon)
+            //print(shop_beacon)
             for(_, _, _, distance) in shop_beacon{
                 if distance == "Immediately" || distance == "Near" {
                     success = true
@@ -30,6 +30,7 @@ class Isshow : ObservableObject {
 struct BreakthroughView: View {
     @EnvironmentObject var isshow : Isshow
     @EnvironmentObject var beacon : RangeBeacon
+    @EnvironmentObject var User : UserData
     @State private var NBscuess = false
     @State private var CHscuess = false
     @State private var OHscuess = false
@@ -44,6 +45,49 @@ struct BreakthroughView: View {
     @State var buttonCh = false
     @State var buttonOh = false
     @State private var fail = false
+    let userdata = UserAirtableService()
+    let checkIndata = CheckInAirtableService()
+    func getpoint(shop_uuid: UUID, shop_name: String){
+        print("\(User.User_Account) : \(User.User_Point)")
+        if let sp = beacon.shop_beacon[shop_uuid]{
+            let currentP = Int(User.User_Point)!
+            let updataP = currentP + sp
+            User.User_Point = String(updataP)
+        }
+        print("\(User.User_Account) : \(User.User_Point)")
+        userdata.fetchUsers(user: User.User_Account){data in
+            DispatchQueue.main.async{
+                if let data = data{
+                    var upFields = data.fields
+                    upFields.point = self.User.User_Point
+                    let userResponse = UserAirtableResponse(records: [UserRecord(
+                        id: data.id,
+                        createdTime: data.createdTime,
+                        fields: upFields
+                    )])
+                    userdata.updateUser(user: userResponse) { success in
+                        if success {
+                            let uuid = shop_uuid.uuidString
+                            print("Field updated successfully")
+                            let newRecord = CheckInFields(user: User.User_Account, location: shop_name, point: beacon.shop_beacon[shop_uuid]!, uuid: uuid)
+                            checkIndata.addCheckIn(user: newRecord) { success in
+                                if success {
+                                    print("success")
+                                } else {
+                                    print("fail")
+                                }
+                            }
+                        } else {
+                            print("Failed to update field")
+                        }
+                    }
+                }
+            }
+        }
+    }//取得點數
+    
+    
+    
     var body: some View {
         ZStack {
             Image("breakBackground")
@@ -89,6 +133,7 @@ struct BreakthroughView: View {
                             if successNb == true{
                                 NBscuess = true
                                 buttonNb = true
+                                getpoint(shop_uuid: uuid, shop_name: "NB")
                             }else{
                                 fail = true
                                 return
@@ -124,6 +169,7 @@ struct BreakthroughView: View {
                             if successCH == true{
                                 CHscuess = true
                                 buttonCh = true
+                                getpoint(shop_uuid: uuid, shop_name: "CH")
                             }else{
                                 fail = true
                                 return
@@ -157,6 +203,7 @@ struct BreakthroughView: View {
                             if successOH == true{
                                 OHscuess = true
                                 buttonOh = true
+                                getpoint(shop_uuid: uuid, shop_name: "OH")
                             }else{
                                 fail = true
                                 return
@@ -226,7 +273,7 @@ struct BreakthroughView: View {
             }
         }
         .onAppear{
-            beacon.search_beacon()
+            beacon.search_beacon(userObject: User)
         }
     }
     
@@ -234,4 +281,6 @@ struct BreakthroughView: View {
 
 #Preview {
     BreakthroughView()
+        .environmentObject(UserData())
+        .environmentObject(RangeBeacon())
 }

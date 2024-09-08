@@ -48,11 +48,11 @@ struct giftAirtableResponse: Codable {
 
 class giftAirtableService {
     let apiKey = airtable().apiKey
-    let baseId = airtable().baseId
-    let tableName = airtable.table.point.rawValue
+    let apiurl = airtable().apiurl
+    let tableName = airtable.table.point.rawValue //點數兌換表
 
     func fetchRecords(completion: @escaping ([giftRecord]?) -> Void) {
-        let urlString = "https://api.airtable.com/v0/\(baseId)/\(tableName)"
+        let urlString = "\(apiurl)/\(tableName)"
         guard let url = URL(string: urlString) else { return }
         
         var request = URLRequest(url: url)
@@ -66,7 +66,7 @@ class giftAirtableService {
             do {
                 let response = try JSONDecoder().decode(giftAirtableResponse.self, from: data)
                 completion(response.records)
-                print(response)
+                //print(response)
             } catch {
                 print("Error decoding data: \(error)")
                 completion(nil)

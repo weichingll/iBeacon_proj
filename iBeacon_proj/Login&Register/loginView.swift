@@ -12,7 +12,6 @@ class IsLog : ObservableObject {
     @Published var isLogin = false //若false則顯示登入畫面或註冊
     @Published var Register = false
     @Published var BeaconPage = false
-    
 }
 class UserData : ObservableObject{
     @Published var User_Account = ""
@@ -20,6 +19,8 @@ class UserData : ObservableObject{
     @Published var User_Name = ""
     @Published var User_Date = Date()
     @Published var User_Email = ""
+    @Published var User_Point = ""
+    @Published var User_Entry = 0
 }
 
 struct mainView:View {
@@ -44,16 +45,27 @@ struct mainView:View {
 struct loginView : View {
     @State private var username: String = ""
     @State private var userPassword: String=""
-    @State private var isRangeBeacon=false
+    @State private var isRangeBeacon = false
     @State private var isShowLoginFail = false
+    let userdata = UserAirtableService()
     @EnvironmentObject var isLog : IsLog
     @EnvironmentObject var data : data_link
     @EnvironmentObject var User : UserData
+    let beacon = BeaconAirtableService()
     
     
     var body: some View {
             VStack{
                 Spacer()
+                Button("TEST"){
+                    beacon.fetchBeacon(){data in
+                        if let data = data{
+                            for d in data{
+                                print("\(d.fields.uuid)")
+                            }
+                        }
+                    }
+                }
                 HStack{
                     Text("Username:")
                         .font(.custom("Inter Regular", size: 12))
@@ -84,7 +96,6 @@ struct loginView : View {
                         .foregroundStyle(.white)
                     Spacer()
                 }
-
                 
                 SecureField("密碼",text: $userPassword)
                     .multilineTextAlignment(.center)
@@ -112,22 +123,22 @@ struct loginView : View {
                         .foregroundStyle(.white)
                     
                     Button ("登入"){
-                        DispatchQueue.main.async {
-                            print(isShowLoginFail)
-                            data.loadData_Account{ accountData in
-                                if (accountData.keys.contains(username)){
-                                    let user_data = accountData[username]!
-                                    for(password, name, date, email) in user_data{
-                                        if password == userPassword{
-                                            User.User_Account = username
-                                            User.User_Password = password
-                                            User.User_Name = name
-                                            User.User_Date = date
-                                            User.User_Email = email
-                                            isLog.isLogin = true
-                                            return
-                                        }
-                                    }
+                        userdata.fetchUsers(user: username){data in
+                            DispatchQueue.main.async{
+                                guard let data = data else{
+                                    print("User Error")
+                                    return
+                                }
+                                if data.fields.password == userPassword{
+                                    User.User_Account = data.fields.user
+                                    User.User_Password = data.fields.password
+                                    User.User_Name = data.fields.name
+                                    User.User_Date = data.fields.date
+                                    User.User_Email = data.fields.email
+                                    User.User_Point = data.fields.point
+                                    User.User_Entry = data.fields.entry
+                                    isLog.isLogin = true
+                                    return
                                 }
                                 isShowLoginFail = true
                             }
@@ -162,7 +173,7 @@ struct registerView : View {
     @State private var useremail : String = ""
     @State private var isShowRegisterSucess = false
     @State private var isShowRegisterFail = false
-
+    let userdata = UserAirtableService()
     var body: some View {
         //zane-lee-IHj0xtWtLKE-unsplash 1
         
@@ -237,7 +248,15 @@ struct registerView : View {
                 }
                 Text("|")
                 Button("註冊"){
-                    DispatchQueue.main.async{
+                    let newUser = UserFields(user: userAccount, password: userPassword, name: userName, date: userdate, email: useremail, point: "0", entry: 0)
+                    userdata.addUser(user: newUser) { success in
+                        if success {
+                            isShowRegisterSucess.toggle()
+                        } else {
+                            isShowRegisterFail.toggle()
+                        }
+                    }
+                    /*DispatchQueue.main.async{
                         data.loadData_Account{ accountData in
                             print(accountData)
                             if (!accountData.keys.contains(userAccount) && userName != "" && userAccount != "" && userPassword != "" && useremail != ""){
@@ -246,11 +265,10 @@ struct registerView : View {
                                 isShowRegisterSucess.toggle()
                                 
                             }else{
-                                
                                 isShowRegisterFail.toggle()
                             }
                         }
-                    }
+                    }*/
                 }
             }
             .alert("註冊成功", isPresented : $isShowRegisterSucess){
@@ -283,4 +301,5 @@ struct registerView : View {
         .environmentObject(IsLog())
         .environmentObject(data_link())
         .environmentObject(UserData())
+        .environmentObject(RangeBeacon())
 }

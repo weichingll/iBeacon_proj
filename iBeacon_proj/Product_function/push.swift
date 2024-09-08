@@ -9,6 +9,7 @@ import SwiftUI
 
 struct push: View {
     @EnvironmentObject var beacon : RangeBeacon
+    @EnvironmentObject var User : UserData
     @State private var isNB = false
     @State private var isCH = false
     @State private var isLinkNB = false
@@ -21,17 +22,13 @@ struct push: View {
                 .edgesIgnoringSafeArea(.all)
         
         NavigationStack {
-            NavigationLink(isActive: $isLinkNB){
+            NavigationLink("",isActive: $isLinkNB){
                 newbalance()
-            }label: {
-                
             }.onDisappear{
                 beacon.stopScanning()
             }
-            NavigationLink(isActive:$isLinkCH){
+            NavigationLink("",isActive:$isLinkCH){
                 chanel()
-            }label: {
-                
             }.onDisappear{
                 beacon.stopScanning()
             }
@@ -94,11 +91,11 @@ struct push: View {
             
             
         }.onAppear{
-            beacon.search_beacon()
+            beacon.search_beacon(userObject: User)
         }
     }
 }
 
 #Preview {
-    push().environmentObject(RangeBeacon())
+    push().environmentObject(RangeBeacon()).environmentObject(UserData())
 }

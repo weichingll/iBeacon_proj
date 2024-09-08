@@ -10,11 +10,14 @@ import SwiftUI
 struct peopleFlow: View {
     @EnvironmentObject var data : data_link
     @EnvironmentObject var beacon : RangeBeacon
+    @EnvironmentObject var User : UserData
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     @State private var people = 0
+    let TPdata = TPAirtableService()
+    @State var num = 0
     var body: some View {
             VStack{
-                Text("目前人流數")
+                Text("今日已入場人數")
                     .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
                 ZStack{
                     Image("peopleBackground")
@@ -24,15 +27,25 @@ struct peopleFlow: View {
                         Spacer()
                             .frame(height: 50)
                         Text("目前人數:")
-                            .foregroundStyle(.white)
+                            .foregroundStyle(.black)
                             .font(.largeTitle)
                         Spacer()
                             .frame(height: 40)
                         Text("\(people)")
-                            .foregroundStyle(.white)
+                            .foregroundStyle(.black)
                             .font(.largeTitle)
                         Spacer()
                             .frame(height: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/)
+                        Button("PUSH"){
+                            num += 1
+                            TPdata.fetchTP{tp in
+                                if let tp = tp{
+                                    TPdata.updateTP(count: TPAirtableResponse(records: [TPRecord(id: tp.id, fields: TPFields(uuid: "12345678-1234-1234-1234-AABBCCDDEE99", count: num))]))
+                                }
+                            }
+                        }
+                        .foregroundColor(.black)
+                        .background(.red)
                         
                     }
                     
@@ -40,13 +53,14 @@ struct peopleFlow: View {
                 
             }
             .onReceive(timer){ _ in
-                beacon.update_Pcount()
-                data.loadData_Beacon_people{ item in
-                    people = Int(item[1])!
+                TPdata.fetchTP{item in
+                    if let item = item{
+                        people = item.fields.count
+                    }
                 }
             }
             .onAppear{
-                beacon.search_beacon()
+                beacon.search_beacon(userObject: User)
             }
             .background(
                 Image("peopleFlowBackgroung")
@@ -56,9 +70,6 @@ struct peopleFlow: View {
                             
         )
             .navigationTitle("人流")
-            
-      
-        
     }
 }
 

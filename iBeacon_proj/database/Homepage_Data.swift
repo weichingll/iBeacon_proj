@@ -40,11 +40,11 @@ struct homeThumbnails: Codable {
 }
 class homeAirtableService {
     let apiKey = airtable().apiKey
-    let baseId = airtable().baseId
-    let tableName = airtable.table.homepage.rawValue
+    let apiurl = airtable().apiurl
+    let tableName = airtable.table.homepage.rawValue //主畫面圖片表
 
     func fetchImages(completion: @escaping ([homeImageInfo]?) -> Void) {
-        let urlString = "https://api.airtable.com/v0/\(baseId)/\(tableName)"
+        let urlString = "\(apiurl)/\(tableName)"
         guard let url = URL(string: urlString) else { return }
         
         var request = URLRequest(url: url)

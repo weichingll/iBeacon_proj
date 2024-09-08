@@ -134,7 +134,7 @@ struct homePage: View {
                 }
             }
             .onAppear{
-                beacon.search_beacon()
+                beacon.search_beacon(userObject: User)
             }
             .onReceive(timer){ _ in
                 //beacon.update_Pcount()
@@ -159,4 +159,6 @@ struct homePage: View {
         .environmentObject(IsLog())
         .environmentObject(data_link())
         .environmentObject(UserData())
+        .environmentObject(RangeBeacon())
+        .environmentObject(Isshow())
 }
