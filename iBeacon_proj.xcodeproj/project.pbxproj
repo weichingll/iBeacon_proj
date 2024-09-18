@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4132A8312C91688100C92CE3 /* giftRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4132A8302C91688100C92CE3 /* giftRecordView.swift */; };
+		4132A8332C9169D300C92CE3 /* giftRecorddata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4132A8322C9169D300C92CE3 /* giftRecorddata.swift */; };
 		4145A1AC2C311F2100A3FFA0 /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4145A1AB2C311F2100A3FFA0 /* SwiftUIView.swift */; };
+		41834A9E2C90352E006C5FEC /* normal-Imformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41834A9D2C90352E006C5FEC /* normal-Imformation.swift */; };
 		41B108882C2EDCF6003C9138 /* userdata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B108872C2EDCF6003C9138 /* userdata.swift */; };
 		41B1088A2C2EDE55003C9138 /* giftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B108892C2EDE55003C9138 /* giftView.swift */; };
 		41B1088C2C2EE52D003C9138 /* giftData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B1088B2C2EE52D003C9138 /* giftData.swift */; };
@@ -36,7 +39,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4132A8302C91688100C92CE3 /* giftRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = giftRecordView.swift; sourceTree = "<group>"; };
+		4132A8322C9169D300C92CE3 /* giftRecorddata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = giftRecorddata.swift; sourceTree = "<group>"; };
 		4145A1AB2C311F2100A3FFA0 /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
+		41834A9D2C90352E006C5FEC /* normal-Imformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "normal-Imformation.swift"; sourceTree = "<group>"; };
 		41B108872C2EDCF6003C9138 /* userdata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userdata.swift; sourceTree = "<group>"; };
 		41B108892C2EDE55003C9138 /* giftView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = giftView.swift; sourceTree = "<group>"; };
 		41B1088B2C2EE52D003C9138 /* giftData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = giftData.swift; sourceTree = "<group>"; };
@@ -90,6 +96,7 @@
 				AC86E0882C889CD90059B7DA /* Total_People.swift */,
 				AC882B022C8B5C1A00DAFA7C /* BeaconData.swift */,
 				ACA427CC2C8CA5E5005C76F4 /* CheckIndata.swift */,
+				4132A8322C9169D300C92CE3 /* giftRecorddata.swift */,
 			);
 			path = database;
 			sourceTree = "<group>";
@@ -124,7 +131,9 @@
 			isa = PBXGroup;
 			children = (
 				41E6A4612C2F097F002ADAEF /* checkInRecord.swift */,
+				4132A8302C91688100C92CE3 /* giftRecordView.swift */,
 				ACF5461E2BE7C79B00D6B7DF /* userInformation.swift */,
+				41834A9D2C90352E006C5FEC /* normal-Imformation.swift */,
 			);
 			path = User_information;
 			sourceTree = "<group>";
@@ -258,6 +267,7 @@
 				ACF546152BE7C68800D6B7DF /* homePage.swift in Sources */,
 				AC7057432C4632550015AE61 /* Airtable.swift in Sources */,
 				41B108882C2EDCF6003C9138 /* userdata.swift in Sources */,
+				4132A8312C91688100C92CE3 /* giftRecordView.swift in Sources */,
 				ACA427CD2C8CA5E5005C76F4 /* CheckIndata.swift in Sources */,
 				41B1088C2C2EE52D003C9138 /* giftData.swift in Sources */,
 				ACF546212BE7C7AC00D6B7DF /* chanel.swift in Sources */,
@@ -266,7 +276,9 @@
 				ACF5461F2BE7C79B00D6B7DF /* userInformation.swift in Sources */,
 				ACF546172BE7C69E00D6B7DF /* peopleFlow.swift in Sources */,
 				4145A1AC2C311F2100A3FFA0 /* SwiftUIView.swift in Sources */,
+				4132A8332C9169D300C92CE3 /* giftRecorddata.swift in Sources */,
 				AC7386E82BE7E00100F7CE7E /* push.swift in Sources */,
+				41834A9E2C90352E006C5FEC /* normal-Imformation.swift in Sources */,
 				AC86E0892C889CD90059B7DA /* Total_People.swift in Sources */,
 				41E6A4622C2F097F002ADAEF /* checkInRecord.swift in Sources */,
 				ACF546132BE7C65900D6B7DF /* loginView.swift in Sources */,

@@ -57,15 +57,6 @@ struct loginView : View {
     var body: some View {
             VStack{
                 Spacer()
-                Button("TEST"){
-                    beacon.fetchBeacon(){data in
-                        if let data = data{
-                            for d in data{
-                                print("\(d.fields.uuid)")
-                            }
-                        }
-                    }
-                }
                 HStack{
                     Text("Username:")
                         .font(.custom("Inter Regular", size: 12))

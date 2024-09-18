@@ -18,8 +18,8 @@ struct homeRecord: Codable {
 }
 
 struct homeFields: Codable {
-    let image: [homeImageInfo]?
-    let name: String?
+    let picture: [homeImageInfo]?
+    let Name: String?
 }
 
 struct homeImageInfo: Codable {
@@ -57,7 +57,7 @@ class homeAirtableService {
             }
             do {
                 let response = try JSONDecoder().decode(homeAirtableResponse.self, from: data)
-                let images = response.records.compactMap { $0.fields.image?.first }
+                let images = response.records.compactMap { $0.fields.picture?.first }
                 completion(images)
             } catch {
                 print("Error decoding data: \(error)")

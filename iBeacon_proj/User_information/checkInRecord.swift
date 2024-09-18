@@ -34,7 +34,7 @@ struct checkInRecordView: View {
                         .foregroundColor(.gray)
                 }
             }
-            .navigationBarTitle("Check-In Records")
+            .navigationBarTitle("打卡紀錄")
             .onAppear {
                 checkIndata.fetchCheckIn(user: User.User_Account){data in
                     if let data = data{

@@ -68,7 +68,11 @@ struct homePage: View {
     @EnvironmentObject var beacon : RangeBeacon
     @EnvironmentObject var shop_data: Isshow
     @State private var isLogout = false
-    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    
+    @State private var images: [homeImageInfo] = []
+    @State private var currentIndex: Int = 0
+    let airtableService = homeAirtableService()
+    let timer = Timer.publish(every: 3, on: .main, in: .common).autoconnect()  // 定义一个每3秒触发的计时器
     
     var body: some View {
         NavigationStack {
@@ -79,59 +83,104 @@ struct homePage: View {
                 })
                 Spacer()
                     .frame(height:80)
-                Text("開始你的冒險吧")
-                
+                Text("歡迎來到Beacon百貨，開始你的冒險吧！")
                 Spacer()
-                HStack{
-                    NavigationLink(destination: push()){
-                        Text("推播")
-                    }
-                    .onDisappear{
-                        beacon.stopScanning()
-                    }
-                    .task{
-                        setnoti()
-                    }
-                    
-                    Text("|")
-                    NavigationLink("點數商城"){
-                        giftView()
-                    }
-                    .onDisappear{
-                        beacon.stopScanning()
-                    }
-                    
-                    Text("|")
-                    NavigationLink(destination: BreakthroughView()){
-                        Text("闖關")
-                    }
-                    .onDisappear{
-                        beacon.stopScanning()
-                        print("STOP BEACON")
-                    }
-                    Text("|")
-                    NavigationLink("人流"){
-                        peopleFlow().environmentObject(RangeBeacon()).environmentObject(data_link())
-                    }
-                    .onDisappear{
-                        beacon.stopScanning()
-                    }
-                    Text("|")
-                    NavigationLink("個人資訊"){
-                        userInformation()
-                    }
-                    .onDisappear{
-                        beacon.stopScanning()
-                    }
-                    .alert("確定登出？", isPresented: $isLogout, actions: {
-                        Button("確定"){
-                            isLog.isLogin.toggle()
+                ScrollViewReader { proxy in
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 10) {
+                            ForEach(images.indices, id: \.self) { index in
+                                AsyncImage(url: URL(string: images[index].url)) { image in
+                                    image
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(height: 200)
+                                        .cornerRadius(10)
+                                } placeholder: {
+                                    ProgressView()
+                                }
+                                .id(index)  // 给每个图片视图一个唯一的ID
+                            }
                         }
-                        Button("取消"){
-                            
+                        .padding()
+                    }
+                    .onAppear {
+                        airtableService.fetchImages { fetchedImages in
+                            if let fetchedImages = fetchedImages {
+                                DispatchQueue.main.async {
+                                    self.images = fetchedImages
+                                }
+                            }
                         }
-                    })
+                    }
+                    .onReceive(timer) { _ in
+                        if !images.isEmpty {
+                            withAnimation {
+                                currentIndex = (currentIndex + 1) % images.count  // 更新当前索引
+                                proxy.scrollTo(currentIndex, anchor: .center)  // 滚动到新的索引
+                            }
+                        }
+                    }
                 }
+                Spacer()
+                ZStack(alignment:.center){
+                    /*
+                    Rectangle()
+                        .stroke(Color.white)
+                        .fill(Color.white)
+                        .frame(width: 1000,height: 20)
+                        .background(Color.white)
+                        .ignoresSafeArea()*/
+                    HStack{
+                        Spacer()
+                        NavigationLink(destination: push()){
+                            Text("推播")
+                                
+                        }
+                        Spacer()
+                        .onDisappear{
+                            beacon.stopScanning()
+                        }
+                        .task{
+                            setnoti()
+                        }
+                        
+                        //Text("|")
+                        
+                        NavigationLink("點數商城"){
+                            giftView()
+                        }
+                        Spacer()
+                        .onDisappear{
+                            beacon.stopScanning()
+                        }
+                        
+                        //Text("|")
+                        NavigationLink(destination: BreakthroughView()){
+                            Text("闖關")
+                        }
+                        Spacer()
+                        .onDisappear{
+                            beacon.stopScanning()
+                            print("STOP BEACON")
+                        }
+                        //Text("|")
+                        NavigationLink("人流"){
+                            peopleFlow().environmentObject(RangeBeacon()).environmentObject(data_link())
+                        }
+                        Spacer()
+                        .onDisappear{
+                            beacon.stopScanning()
+                        }
+                        //Text("|")
+                        NavigationLink("個人資訊"){
+                            userInformation()
+                        }
+                        Spacer()
+                        .onDisappear{
+                            beacon.stopScanning()
+                        }
+                        
+                    }}
             }
             .onAppear{
                 beacon.search_beacon(userObject: User)
@@ -143,11 +192,12 @@ struct homePage: View {
                     noti("NB")
                 }
             }
+            
             .background(
                 Image("homePageBackground")
                     .resizable(resizingMode: .stretch)
                     .scaledToFill()
-                    .edgesIgnoringSafeArea(.all)
+                    .ignoresSafeArea()
                             
         )
         }

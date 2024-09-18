@@ -13,13 +13,13 @@ class airtable{
     
     let apiurl = "https://api.airtable.com/v0/app5fKBa04lBdINdG"
     //ex: https://api.airtable.com/v0/app5fKBa04lBdINdG/table_name
-    
+
     enum table: String{                         //ex : airtable.table.user.rawValue
         case user = "User"                      //使用者表
-        case homepage = "homepage"              //主畫面圖片表
+        case homepage = "shop"              //主畫面圖片表
         case checkIn = "checkInRecord"    //獲得點數記錄表
         case point = "point"                    //點數兌換表
-        case giftRecord = "giftRecord"          //兌換記錄表
+        case gr = "giftRecord"          //兌換記錄表
         case beacon = "beacon"                  //beacon表
         case tp = "Total_People"                //人流表
     }
