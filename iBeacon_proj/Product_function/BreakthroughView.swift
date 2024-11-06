@@ -107,25 +107,25 @@ struct BreakthroughView: View {
                         .resizable()
                         .scaledToFit()
                         .frame(height: 100)
-                        .position(x:40,y:130)
+                        .position(x:40,y:60)
                         Image("chanel")
                             .resizable()
                             .scaledToFit()
                             .frame(height: 100)
-                            .position(x:40,y:130)
+                            .position(x:40,y:60)
                         Image("oldcheers")
                             .resizable()
                             .scaledToFit()
                             .frame(height: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/)
                             .scaledToFill()
                             .clipShape(Circle())
-                            .position(x:30,y:130)
+                            .position(x:30,y:60)
                     Spacer()
                             
                 }
                 HStack{
-                    Spacer()
-                        .frame(width: 150)
+                   Spacer()
+                        //.frame(width: 150)
                     Button{
                         let uuid = UUID(uuidString: "12345678-1234-1234-1234-AABBCCDDEE11")!//NB
                         if beacon.beaconData.keys.contains(uuid){
@@ -149,19 +149,20 @@ struct BreakthroughView: View {
                                 .padding()
                                 .background(Color.black)
                                 .cornerRadius(100)
-                                .position(x:-25,y:20)
+                                .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/)
+                                //.position(x:-25,y:20)
                         }else{
                             Text("成功！")
                                 .foregroundStyle(.white)
                                 .padding()
                                 .background(Color.black)
                                 .cornerRadius(100)
-                                .position(x:-25,y:20)
+                                //.position(x:-25,y:20)
                         }
                         
                     }
                     .disabled(buttonNb)
-                    
+                    Spacer().frame(width: 45)
                     Button{
                         let uuid = UUID(uuidString: "12345678-1234-1234-1234-AABBCCDDEE22")!//CH
                         if beacon.beaconData.keys.contains(uuid){
@@ -185,17 +186,19 @@ struct BreakthroughView: View {
                                 .padding()
                                 .background(Color.black)
                                 .cornerRadius(100)
-                                .position(x:-25,y:20)
+                                .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/)
+                                //.position(x:-25,y:20)
                         }else{
                             Text("成功！")
                                 .foregroundStyle(.white)
                                 .padding()
                                 .background(Color.black)
                                 .cornerRadius(100)
-                                .position(x:-25,y:20)
+                                //.position(x:-25,y:20)
                         }
                     }
                     .disabled(buttonCh)
+                    Spacer().frame(width: 30)
                     Button{
                         let uuid = UUID(uuidString: "12345678-1234-1234-1234-AABBCCDDEE33")!//OH
                         if beacon.beaconData.keys.contains(uuid){
@@ -219,18 +222,21 @@ struct BreakthroughView: View {
                                 .padding()
                                 .background(Color.black)
                                 .cornerRadius(100)
-                                .position(x:-25,y:20)
+                                .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/)
+                                //.position(x:-25,y:20)
                         }else{
                             Text("成功！")
                                 .foregroundStyle(.white)
                                 .padding()
                                 .background(Color.black)
                                 .cornerRadius(100)
-                                .position(x:-25,y:20)
+                                //.position(x:-25,y:20)
                         }
                     }
                     .disabled(buttonOh)
+                    Spacer()
                 }
+                .padding(.top,-200)
                 if(NBscuess && CHscuess && OHscuess && !finish){
                     Button("兌換禮物"){
                         isshowalert.toggle()
