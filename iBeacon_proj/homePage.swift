@@ -52,8 +52,8 @@ func setnoti(){
 func noti(_ shop : String){
     let content = UNMutableNotificationContent()
     content.title = shop
-    content.subtitle = "Wang"
-    content.body = "\(shop) is near"
+    content.subtitle = " "
+    content.body = "接近\(shop)專櫃囉！"
     content.sound = UNNotificationSound.default
     let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
     let request = UNNotificationRequest(identifier: "testNo", content: content, trigger: trigger)
@@ -72,7 +72,7 @@ struct homePage: View {
     @State private var images: [homeImageInfo] = []
     @State private var currentIndex: Int = 0
     let airtableService = homeAirtableService()
-    let timer = Timer.publish(every: 3, on: .main, in: .common).autoconnect()  // 定义一个每3秒触发的计时器
+    let timer = Timer.publish(every: 10, on: .main, in: .common).autoconnect()
     
     var body: some View {
         NavigationStack {
@@ -187,10 +187,17 @@ struct homePage: View {
             }
             .onReceive(timer){ _ in
                 //beacon.update_Pcount()
-                let uuid = UUID(uuidString: "12345678-1234-1234-1234-AABBCCDDEE11")!//NB
+                for (uuid, _) in beacon.beaconData {
+                    if(uuid != UUID(uuidString: "12345678-1234-1234-1234-AABBCCDDEE99")){
+                        if shop_data.search_shop(uuid, beacon.beaconData) {
+                            noti("\(beacon.shop_name[uuid]!)")
+                        }
+                    }
+                }
+                /*let uuid = UUID(uuidString: "12345678-1234-1234-1234-AABBCCDDEE11")!//NB
                 if shop_data.search_shop(uuid, beacon.beaconData){
                     noti("NB")
-                }
+                }*/
             }
             
             .background(

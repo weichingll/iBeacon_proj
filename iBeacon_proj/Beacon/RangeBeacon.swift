@@ -22,6 +22,7 @@ class RangeBeacon : NSObject, ObservableObject, CLLocationManagerDelegate{
     let TPdata = TPAirtableService()
     let BNData = BeaconAirtableService()
     var shop_beacon: [UUID: Int] = [:]
+    var shop_name: [UUID: String] = [:]
     var data : data_link
     var user_entry = 0
     var upentry = 0
@@ -69,6 +70,7 @@ class RangeBeacon : NSObject, ObservableObject, CLLocationManagerDelegate{
                                  if !enteredUUIDs.contains(uuid){
                                      enteredUUIDs.append(uuid)
                                      shop_beacon[uuid] = beacon_data.fields.point
+                                     shop_name[uuid] = beacon_data.fields.shop
                                  }
                              }
                          }
@@ -142,7 +144,7 @@ class RangeBeacon : NSObject, ObservableObject, CLLocationManagerDelegate{
                 if user_entry == 1{
                     isTP = true
                 }
-                print("distance = \(people[0].3), entry = \(user_entry), isTP = \(isTP)")
+                print(beaconData)
                 let status = people[0].3
                 if status == "Immediately" && isTP == false{
                     user_entry = 1
