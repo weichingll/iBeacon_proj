@@ -38,7 +38,7 @@ struct checkInRecordView: View {
             .onAppear {
                 checkIndata.fetchCheckIn(user: User.User_Account){data in
                     if let data = data{
-                        checkIn = data
+                        checkIn = data.sorted(using: [SortDescriptor(\.createdTime, order: .reverse)])
                     }
                 }
             }
@@ -48,7 +48,7 @@ struct checkInRecordView: View {
     func formattedDate(_ dateString: String) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-        dateFormatter.timeZone = TimeZone(identifier: "UTC") // 设置时区为 UTC
+        dateFormatter.timeZone = TimeZone(identifier: "UTC+8") // 设置时区为 UTC
         guard let date = dateFormatter.date(from: dateString) else {
             return "Invalid Date"
         }

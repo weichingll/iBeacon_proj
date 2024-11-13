@@ -44,7 +44,7 @@ struct giftRecordView: View {
             .onAppear {
                 grdata.fetchGR(user: "s001"){data in
                     if let data = data{
-                        GR = data
+                        GR = data.sorted(using: [SortDescriptor(\.createdTime, order: .reverse)])
                     }
                 }
             }
@@ -54,7 +54,7 @@ struct giftRecordView: View {
     func formattedDate(_ dateString: String) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-        dateFormatter.timeZone = TimeZone(identifier: "UTC") // 设置时区为 UTC
+        dateFormatter.timeZone = TimeZone(identifier: "UTC+8")
         guard let date = dateFormatter.date(from: dateString) else {
             return "Invalid Date"
         }
@@ -63,7 +63,7 @@ struct giftRecordView: View {
         let modifiedDate = calendar.date(byAdding: .hour, value: 8, to: date) ?? date
         // 重新格式化输出
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        dateFormatter.timeZone = TimeZone.current // 设置时区为当前时区
+        dateFormatter.timeZone = TimeZone.current
         return dateFormatter.string(from: modifiedDate)
     }
 }
