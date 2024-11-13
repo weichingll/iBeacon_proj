@@ -36,17 +36,7 @@ struct peopleFlow: View {
                             .font(.largeTitle)
                         Spacer()
                             .frame(height: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/)
-                        Button("PUSH"){
-                            num += 1
-                            TPdata.fetchTP{tp in
-                                if let tp = tp{
-                                    TPdata.updateTP(count: TPAirtableResponse(records: [TPRecord(id: tp.id, fields: TPFields(uuid: "12345678-1234-1234-1234-AABBCCDDEE99", count: num))]))
-                                }
-                            }
-                        }
-                        .foregroundColor(.black)
-                        .background(.red)
-                        
+    
                     }
                     
                 }
