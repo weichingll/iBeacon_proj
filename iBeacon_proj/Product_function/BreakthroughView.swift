@@ -44,6 +44,7 @@ struct BreakthroughView: View {
     @State var buttonNb = false
     @State var buttonCh = false
     @State var buttonOh = false
+    @State var success_detect = false
     @State private var fail = false
     let userdata = UserAirtableService()
     let checkIndata = CheckInAirtableService()
@@ -86,7 +87,7 @@ struct BreakthroughView: View {
         }
     }//取得點數
     
-    
+    let images = ["NB","chanel", "oldcheers"]
     
     var body: some View {
         ZStack {
@@ -101,25 +102,41 @@ struct BreakthroughView: View {
                     .position(x: 250,y:80)
                  
                 HStack{
-                    Spacer()
-                        .frame(width: 80)
-                    Image("NB")
+                    Spacer().frame(width: 80)
+                    ForEach(0..<images.count, id: \.self){index in
+                        if(images[index] == "oldcheers"){
+                            Image(images[index])
+                                .resizable()
+                                .scaledToFit()
+                                .frame(height: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/)
+                                .scaledToFill()
+                                .clipShape(Circle())
+                                .position(x:35,y:60)
+                        }else{
+                            Image(images[index])
+                                .resizable()
+                                .scaledToFit()
+                                .frame(height: 100)
+                                .position(x:35,y:60)
+                        }
+                    }
+                    /*Image("NB")
                         .resizable()
                         .scaledToFit()
                         .frame(height: 100)
-                        .position(x:40,y:60)
-                        Image("chanel")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(height: 100)
-                            .position(x:40,y:60)
-                        Image("oldcheers")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(height: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/)
-                            .scaledToFill()
-                            .clipShape(Circle())
-                            .position(x:30,y:60)
+                        .position(x:35,y:60)
+                    Image("chanel")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 100)
+                        .position(x:35,y:60)
+                    Image("oldcheers")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/)
+                        .scaledToFill()
+                        .clipShape(Circle())
+                        .position(x:35,y:60)*/
                     Spacer()
                             
                 }
@@ -134,6 +151,7 @@ struct BreakthroughView: View {
                                 NBscuess = true
                                 buttonNb = true
                                 getpoint(shop_uuid: uuid, shop_name: "NB")
+                                success_detect = true
                             }else{
                                 fail = true
                                 return
@@ -171,6 +189,7 @@ struct BreakthroughView: View {
                                 CHscuess = true
                                 buttonCh = true
                                 getpoint(shop_uuid: uuid, shop_name: "CH")
+                                success_detect = true
                             }else{
                                 fail = true
                                 return
@@ -207,6 +226,7 @@ struct BreakthroughView: View {
                                 OHscuess = true
                                 buttonOh = true
                                 getpoint(shop_uuid: uuid, shop_name: "OH")
+                                success_detect = true
                             }else{
                                 fail = true
                                 return
@@ -252,13 +272,20 @@ struct BreakthroughView: View {
                 }
             }
         }
-        .alert("偵測失敗，請再靠近櫃位",isPresented:$fail ){
+        .alert("偵測失敗，請再靠近櫃位!",isPresented:$fail ){
             Button("好的"){
                 fail = false
             }
         }
+        .alert("成功，獲得20點!",isPresented:$success_detect ){
+            Button("好的"){
+                success_detect = false
+            }
+        }message: {
+            Text("總共有\(User.User_Point)點")
+        }
         
-        .alert("可以兌換禮物囉", isPresented: $isshowalert){
+        .alert("可以兌換禮物囉!", isPresented: $isshowalert){
             Button("兌換"){
                 isshowalert2.toggle()
             }
@@ -280,6 +307,29 @@ struct BreakthroughView: View {
         }
         .onAppear{
             beacon.search_beacon(userObject: User)
+            checkIndata.fetchCheckIn(user: "\(User.User_Account)"){data in
+                if let data = data{
+                    for record in data{
+                        if let recordUUID = UUID(uuidString: record.fields.uuid){
+                            if(beacon.enteredUUIDs.contains(recordUUID)){
+                                switch record.fields.location{
+                                case "NB":
+                                    NBscuess = true
+                                    buttonNb = true
+                                case "CH":
+                                    CHscuess = true
+                                    buttonCh = true
+                                case "OH":
+                                    OHscuess = true
+                                    buttonOh = true
+                                default:
+                                    break
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
     

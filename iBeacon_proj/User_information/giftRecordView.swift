@@ -42,7 +42,7 @@ struct giftRecordView: View {
             }
             .navigationBarTitle("兌換紀錄")
             .onAppear {
-                grdata.fetchGR(user: "s001"){data in
+                grdata.fetchGR(user: "\(User.User_Account)"){data in
                     if let data = data{
                         GR = data.sorted(using: [SortDescriptor(\.createdTime, order: .reverse)])
                     }

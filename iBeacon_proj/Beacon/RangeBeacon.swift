@@ -144,7 +144,7 @@ class RangeBeacon : NSObject, ObservableObject, CLLocationManagerDelegate{
                 if user_entry == 1{
                     isTP = true
                 }
-                print(beaconData)
+                //print(beaconData)
                 let status = people[0].3
                 if status == "Immediately" && isTP == false{
                     user_entry = 1

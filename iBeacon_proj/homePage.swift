@@ -8,36 +8,6 @@ import SwiftUI
 import UserNotifications
 import CoreLocation
 
-/*class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDelegate, CLLocationManagerDelegate {
-    var locationManager: CLLocationManager?
-    
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        UNUserNotificationCenter.current().delegate = self
-        
-        // Request notification permissions
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
-            if granted {
-                print("Notification permissions granted.")
-            } else {
-                print("Notification permissions denied.")
-            }
-        }
-        
-        // Initialize and configure CLLocationManager
-        locationManager = CLLocationManager()
-        locationManager?.delegate = self
-        locationManager?.requestAlwaysAuthorization()
-        locationManager?.allowsBackgroundLocationUpdates = true
-        locationManager?.startMonitoringSignificantLocationChanges()
-        
-        return true
-    }
-    
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        completionHandler([.banner, .sound])
-    }
-}*/
-
 func setnoti(){
     UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge])
     {(granted, rror) in
@@ -184,6 +154,7 @@ struct homePage: View {
             }
             .onAppear{
                 beacon.search_beacon(userObject: User)
+                
             }
             .onReceive(timer){ _ in
                 //beacon.update_Pcount()
