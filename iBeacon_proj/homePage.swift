@@ -42,7 +42,7 @@ struct homePage: View {
     @State private var images: [homeImageInfo] = []
     @State private var currentIndex: Int = 0
     let airtableService = homeAirtableService()
-    let timer = Timer.publish(every: 10, on: .main, in: .common).autoconnect()
+    let timer = Timer.publish(every: 30, on: .main, in: .common).autoconnect()
     
     var body: some View {
         NavigationStack {
